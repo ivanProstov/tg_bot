@@ -1,0 +1,30 @@
+name: DevOps CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate .gitignore
+        run: |
+          if grep -q "node_modules" .gitignore; then
+            echo "✅ .gitignore validation passed"
+          else
+            echo "❌ .gitignore validation failed"
+            exit 1
+          fi
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Simulate deploy
+        run: echo "🚀 Deploying to production..."
