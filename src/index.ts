@@ -30,6 +30,7 @@ app.post('/send', async (req: Request<{ message: string }>, res: Response) => {
   } catch (e: unknown) {
     const error = normalizeError(e);
     res.status(400).send(error.message);
+    testFn('test');
   }
 });
 
