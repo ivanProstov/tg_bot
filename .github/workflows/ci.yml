@@ -19,6 +19,26 @@ jobs:
             echo "❌ .gitignore validation failed"
             exit 1
           fi
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          cache: 'yarn' # Включаем встроенное кэширование для Yarn
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Set Yarn version
+        run: yarn set version 4.9.2
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run lint
+        run: yarn lint
+
+      - name: Run test
+        run: yarn test
 
   deploy:
     runs-on: ubuntu-latest
