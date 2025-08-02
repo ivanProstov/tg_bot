@@ -43,6 +43,9 @@ jobs:
       - name: Run build
         run: yarn build
 
+      - name: Show current directory contents
+        run: ls -la
+
       - name: Validate dist
         run: |
           if [ -d "./dist" ]; then
@@ -51,7 +54,6 @@ jobs:
             echo "❌ dist validation failed"
             exit 1
           fi
-        
 
   deploy:
     runs-on: ubuntu-latest
