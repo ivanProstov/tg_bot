@@ -40,6 +40,19 @@ jobs:
       - name: Run test
         run: yarn test
 
+      - name: Run build
+        run: yarn build
+
+      - name: Validate dist
+        run: |
+          if [ -d "./dist" ]; then
+            echo "✅ dist validation passed"
+          else
+            echo "❌ dist validation failed"
+            exit 1
+          fi
+        
+
   deploy:
     runs-on: ubuntu-latest
     needs: test
