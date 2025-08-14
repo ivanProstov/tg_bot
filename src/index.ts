@@ -10,7 +10,7 @@ const server = http.createServer(app);
 app.use(express.json());
 
 app.get('/send', (_req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('Hello World!1');
 });
 
 app.post('/send', async (req: Request<{ message: string }>, res: Response) => {
