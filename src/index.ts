@@ -9,6 +9,10 @@ const app = express();
 const server = http.createServer(app);
 app.use(express.json());
 
+app.get('/send', (_req: Request, res: Response) => {
+  res.send('Hello World!');
+});
+
 app.post('/send', async (req: Request<{ message: string }>, res: Response) => {
   try {
     if (!TG_BOT_API_KEY || !TG_BOT_CHAT_ID || !req.body.message) {
